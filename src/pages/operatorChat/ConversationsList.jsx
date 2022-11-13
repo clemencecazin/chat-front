@@ -1,35 +1,44 @@
 import { useState } from "react";
-import WindowChat from "./WindowChatOperator";
+import WindowChatOperator from "./WindowChatOperator";
 
 export default function ConversationList({
     conversation,
     setContentMessageOperator,
     contentMessageOperator,
+    convIsOpen,
+    setConvIsOpen,
 }) {
-    const [convIsOpen, setConvIsOpen] = useState(false);
     return (
-        <div>
+        <div className="window-chat operator">
             {" "}
             <h1>Opérateur</h1>
-            {conversation &&
-            conversation.active === true &&
-            conversation.messages.length ? (
-                <div onClick={() => setConvIsOpen(true)}>
-                    {
-                        conversation.messages[conversation.messages.length - 1]
-                            .messages.message
-                    }
-                </div>
-            ) : (
-                ""
-            )}
-            {convIsOpen && (
-                <WindowChat
-                    conversation={conversation}
-                    setContentMessageOperator={setContentMessageOperator}
-                    contentMessageOperator={contentMessageOperator}
-                />
-            )}
+            <div className="conversation-operator-container">
+                {conversation && conversation.messages.length ? (
+                    <>
+                        <div
+                            className="conversation-card"
+                            onClick={() => setConvIsOpen(true)}
+                        >
+                            {
+                                conversation.messages[
+                                    conversation.messages.length - 1
+                                ].messages.message
+                            }
+                        </div>
+                        {convIsOpen && (
+                            <WindowChatOperator
+                                conversation={conversation}
+                                setContentMessageOperator={
+                                    setContentMessageOperator
+                                }
+                                contentMessageOperator={contentMessageOperator}
+                            />
+                        )}
+                    </>
+                ) : (
+                    ""
+                )}
+            </div>
         </div>
     );
 }

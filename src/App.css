@@ -1,0 +1,255 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+body {
+    color: white;
+}
+
+button {
+    color: white;
+    border: none;
+}
+
+.container {
+    display: flex;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #34465c;
+}
+
+.delete {
+    color: white;
+    background-color: rgb(204, 61, 61);
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.delete:hover {
+    color: white;
+    background-color: rgb(129, 29, 29);
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.window-chat {
+    height: 100vh;
+}
+
+.visitor {
+    flex: 1;
+    background-color: #f7f9fb;
+    padding: 20px;
+}
+
+.operator {
+    flex: 2;
+    padding: 20px;
+}
+
+.button-create-conversation {
+    background-color: #bacce2;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.button-create-conversation:hover {
+    background-color: #94aac6;
+}
+
+.conversation-visitor-container {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: solid 1px #94aac6;
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+}
+
+.conversation-visitor-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #bacce2;
+    border-radius: 20px 20px 0 0;
+    padding: 20px;
+    font-size: 1.2rem;
+}
+
+.conversation-visitor-header button {
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.conversation-visitor-form {
+    display: flex;
+    justify-content: space-between;
+    min-height: 40px;
+    padding: 0 20px;
+}
+
+.conversation-visitor-form input {
+    width: 78%;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+.conversation-visitor-form input[type="text"] {
+    padding-left: 10px;
+}
+
+.conversation-visitor-form button {
+    background-color: #bacce2;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.conversation-visitor-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+    justify-content: flex-end;
+    align-items: flex-end;
+    overflow-y: scroll;
+}
+
+.conversation-visitor-body li {
+    list-style: none;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    max-width: 60%;
+}
+
+.conversation-visitor-message {
+    background-color: #d9a5b3;
+}
+.conversation-operator-message {
+    background-color: #c6d7eb;
+    align-self: start;
+}
+
+/* OPERATOR side */
+
+.conversation-card {
+    border: solid 1px #94aac6;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 30px;
+    color: black;
+}
+
+.conversation-card:hover {
+    background-color: #f2f4f7;
+}
+
+.conversation-operator-container {
+    display: flex;
+    width: 100%;
+}
+
+.conversation-operator-conversation {
+    flex: 6;
+    margin-left: 10px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    border: solid 1px #94aac6;
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+    justify-content: space-between;
+}
+
+.conversation-operator-conversation ul {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.conversation-operator-conversation li {
+    list-style: none;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 60%;
+}
+
+.conversation-operator-conversation input {
+    width: 85%;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+.conversation-operator-conversation input[type="text"] {
+    padding-left: 10px;
+}
+
+.conversation-operator-over {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+    background-color: #34465c;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.conversation-operator-end {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.message-delete {
+    color: rgb(143, 143, 143);
+    display: flex;
+    padding: 10px;
+    align-items: center;
+}
+
+.message-delete span:first-child {
+    margin-left: 10px;
+    color: white;
+    background-color: rgb(204, 61, 61);
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.message-delete span:nth-child(2) {
+    margin-left: 10px;
+    color: rgb(61, 60, 60);
+    border: solid 1px rgb(204, 61, 61);
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+}

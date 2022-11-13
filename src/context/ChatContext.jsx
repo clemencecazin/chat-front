@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useState } from "react";
 import { createContext } from "react";
-import WindowChat from "../pages/visitorChat/WindowChat";
+import WindowChat from "../pages/visitorChat/WindowChatVisitor";
 import WindowChatOperator from "../pages/operatorChat/WindowChatOperator";
 import axios from "axios";
 import { useEffect } from "react";
@@ -20,8 +20,10 @@ export function ChatProvider({ children }) {
     const [message, setMessage] = useState(null);
     const [contentMessage, setContentMessage] = useState("");
     const [contentMessageOperator, setContentMessageOperator] = useState("");
+    const [convIsOpen, setConvIsOpen] = useState(false);
 
     const createConversation = async (type) => {
+        setConvIsOpen(false);
         try {
             if (type === "visitor") {
                 const res = await axios.post(
@@ -55,6 +57,24 @@ export function ChatProvider({ children }) {
             console.log(error.message);
         }
         setIsOpen(false);
+    };
+
+    const deleteConversation = async (id) => {
+        try {
+            const res = await axios.delete(
+                `http://localhost:3000/delete/conversation/${id}`
+            );
+
+            console.log("res", res);
+
+            if (res.data) {
+                setIsOpen(false);
+                setConvIsOpen(false);
+                setConversation(null);
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
     };
 
     const handleSubmit = async (e, id, type) => {
@@ -114,20 +134,25 @@ export function ChatProvider({ children }) {
                 createConversation,
                 closeConversation,
                 handleSubmit,
+                deleteConversation,
             }}
         >
             {children}
-            <WindowChat
-                isOpen={isOpen}
-                conversation={conversation}
-                setContentMessage={setContentMessage}
-                contentMessage={contentMessage}
-            />
-            <ConversationList
-                conversation={conversation}
-                setContentMessageOperator={setContentMessageOperator}
-                contentMessageOperator={contentMessageOperator}
-            />
+            <div className="container">
+                <WindowChat
+                    isOpen={isOpen}
+                    conversation={conversation}
+                    setContentMessage={setContentMessage}
+                    contentMessage={contentMessage}
+                />
+                <ConversationList
+                    conversation={conversation}
+                    setContentMessageOperator={setContentMessageOperator}
+                    contentMessageOperator={contentMessageOperator}
+                    convIsOpen={convIsOpen}
+                    setConvIsOpen={setConvIsOpen}
+                />
+            </div>
         </ChatContext.Provider>
     );
 }

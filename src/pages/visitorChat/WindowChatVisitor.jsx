@@ -10,34 +10,46 @@ export default function WindowChat({
         useChatContext();
 
     return (
-        <>
+        <div className="window-chat visitor">
             <h1>Visiteur</h1>
             {!isOpen && (
-                <button onClick={() => createConversation("visitor")}>
+                <button
+                    className="button-create-conversation"
+                    onClick={() => createConversation("visitor")}
+                >
                     Lancer une conversation
                 </button>
             )}
             {isOpen && conversation && (
-                <div>
-                    <div>
+                <div className="conversation-visitor-container">
+                    <div className="conversation-visitor-header">
                         Bienvenue{" "}
                         <button
                             onClick={() => closeConversation(conversation._id)}
                         >
-                            Close
+                            <span class="material-symbols-outlined">close</span>
                         </button>
                     </div>
-                    <div>
+                    <ul className="conversation-visitor-body">
                         {conversation.messages &&
                             conversation.messages.map((message, index) => {
                                 return (
-                                    <div key={index}>
+                                    <li
+                                        className={
+                                            message.messages.sender ===
+                                            "visitor"
+                                                ? "conversation-visitor-message"
+                                                : "conversation-operator-message"
+                                        }
+                                        key={index}
+                                    >
                                         {message.messages.message}
-                                    </div>
+                                    </li>
                                 );
                             })}
-                    </div>
+                    </ul>
                     <form
+                        className="conversation-visitor-form"
                         onSubmit={(e) =>
                             handleSubmit(e, conversation._id, "visitor")
                         }
@@ -52,6 +64,6 @@ export default function WindowChat({
                     </form>
                 </div>
             )}
-        </>
+        </div>
     );
 }
