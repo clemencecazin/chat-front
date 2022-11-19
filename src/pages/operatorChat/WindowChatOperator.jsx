@@ -8,7 +8,7 @@ export default function WindowChatOperator({
 }) {
     const { handleSubmit, deleteConversation } = useChatContext();
     const [messageDelete, setMessageDelete] = useState(null);
-    console.log("messageDelete", messageDelete);
+    console.log("conversation", conversation);
 
     const handleDelete = (id) => {
         setMessageDelete(
@@ -20,7 +20,7 @@ export default function WindowChatOperator({
         );
     };
 
-    return (
+    return conversation ? (
         <div className="conversation-operator-conversation">
             {!conversation.active && (
                 <div className="conversation-operator-end">
@@ -72,9 +72,13 @@ export default function WindowChatOperator({
                         }
                     />
 
-                    <button type="submit">Envoyer</button>
+                    {contentMessageOperator && (
+                        <button type="submit">Envoyer</button>
+                    )}
                 </form>
             )}
         </div>
+    ) : (
+        <p>Pas de conversation</p>
     );
 }

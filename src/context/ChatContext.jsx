@@ -17,10 +17,13 @@ export function ChatProvider({ children }) {
     const [isOpen, setIsOpen] = useState(false);
     const [conversationActiveId, setConversationActiveId] = useState(null);
     const [conversation, setConversation] = useState(null);
+    const [allConversations, setAllConversations] = useState(null);
     const [message, setMessage] = useState(null);
     const [contentMessage, setContentMessage] = useState("");
     const [contentMessageOperator, setContentMessageOperator] = useState("");
     const [convIsOpen, setConvIsOpen] = useState(false);
+    const [archiveIsOpen, setArchiveIsOpen] = useState(false);
+    const [archiveListing, setArchiveListing] = useState(false);
 
     const createConversation = async (type) => {
         setConvIsOpen(false);
@@ -52,6 +55,12 @@ export function ChatProvider({ children }) {
                     }
                 );
                 setConversation(res.data);
+
+                const conv = await axios.get(
+                    `http://localhost:3000/conversations`
+                );
+
+                setAllConversations(conv.data);
             }
         } catch (error) {
             console.log(error.message);
@@ -65,12 +74,19 @@ export function ChatProvider({ children }) {
                 `http://localhost:3000/delete/conversation/${id}`
             );
 
-            console.log("res", res);
+            console.log("resdelete", res.data);
 
             if (res.data) {
                 setIsOpen(false);
                 setConvIsOpen(false);
                 setConversation(null);
+                setArchiveIsOpen(false);
+
+                const conv = await axios.get(
+                    `http://localhost:3000/conversations`
+                );
+
+                setAllConversations(conv.data);
             }
         } catch (error) {
             console.log(error.message);
@@ -121,6 +137,16 @@ export function ChatProvider({ children }) {
 
                 setConversation(res.data);
             };
+
+            const getAllConversations = async () => {
+                const res = await axios.get(
+                    `http://localhost:3000/conversations`
+                );
+
+                setAllConversations(res.data);
+            };
+
+            getAllConversations();
             getConversationMessages();
         } catch (error) {
             console.log(error.message);
@@ -147,10 +173,16 @@ export function ChatProvider({ children }) {
                 />
                 <ConversationList
                     conversation={conversation}
+                    setConversation={setConversation}
                     setContentMessageOperator={setContentMessageOperator}
                     contentMessageOperator={contentMessageOperator}
                     convIsOpen={convIsOpen}
                     setConvIsOpen={setConvIsOpen}
+                    allConversations={allConversations}
+                    archiveIsOpen={archiveIsOpen}
+                    setArchiveIsOpen={setArchiveIsOpen}
+                    archiveListing={archiveListing}
+                    setArchiveListing={setArchiveListing}
                 />
             </div>
         </ChatContext.Provider>

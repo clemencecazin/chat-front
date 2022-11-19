@@ -60,7 +60,9 @@ export default function WindowChat({
                             type="text"
                             onChange={(e) => setContentMessage(e.target.value)}
                         />
-                        <button type="submit">Envoyer</button>
+                        {contentMessage && (
+                            <button type="submit">Envoyer</button>
+                        )}
                     </form>
                 </div>
             )}
