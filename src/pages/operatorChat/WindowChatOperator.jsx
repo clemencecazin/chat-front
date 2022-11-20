@@ -8,7 +8,6 @@ export default function WindowChatOperator({
 }) {
     const { handleSubmit, deleteConversation } = useChatContext();
     const [messageDelete, setMessageDelete] = useState(null);
-    console.log("conversation", conversation);
 
     const handleDelete = (id) => {
         setMessageDelete(
@@ -43,13 +42,13 @@ export default function WindowChatOperator({
                               return (
                                   <li
                                       className={
-                                          message.messages.sender === "visitor"
+                                          message.sender === "visitor"
                                               ? "conversation-visitor-message"
                                               : "conversation-operator-message"
                                       }
                                       key={index}
                                   >
-                                      {message.messages.message}
+                                      {message.message}
                                   </li>
                               );
                           })

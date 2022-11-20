@@ -36,14 +36,13 @@ export default function WindowChat({
                                 return (
                                     <li
                                         className={
-                                            message.messages.sender ===
-                                            "visitor"
+                                            message.sender === "visitor"
                                                 ? "conversation-visitor-message"
                                                 : "conversation-operator-message"
                                         }
                                         key={index}
                                     >
-                                        {message.messages.message}
+                                        {message.message}
                                     </li>
                                 );
                             })}

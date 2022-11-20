@@ -5,7 +5,6 @@ export default function ArchiveConversation({
     allConversations,
     setConvIsOpen,
     convIsOpen,
-    setConversation,
     archiveIsOpen,
     setArchiveIsOpen,
     archiveListing,
@@ -13,7 +12,6 @@ export default function ArchiveConversation({
 }) {
     const [archiveConversation, setArchiveConversation] = useState();
 
-    console.log(allConversations);
     return (
         <div className="archives">
             <h1>Opérateur</h1>

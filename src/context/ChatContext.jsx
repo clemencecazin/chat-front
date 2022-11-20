@@ -14,16 +14,28 @@ export function useChatContext() {
 }
 
 export function ChatProvider({ children }) {
-    const [isOpen, setIsOpen] = useState(false);
-    const [conversationActiveId, setConversationActiveId] = useState(null);
-    const [conversation, setConversation] = useState(null);
+    const [isOpen, setIsOpen] = useState(
+        JSON.parse(localStorage.getItem("conversation"))
+    );
+    const [conversation, setConversation] = useState(
+        JSON.parse(localStorage.getItem("conversation"))
+    );
     const [allConversations, setAllConversations] = useState(null);
     const [message, setMessage] = useState(null);
     const [contentMessage, setContentMessage] = useState("");
     const [contentMessageOperator, setContentMessageOperator] = useState("");
-    const [convIsOpen, setConvIsOpen] = useState(false);
+    const [convIsOpen, setConvIsOpen] = useState(
+        JSON.parse(localStorage.getItem("conversation"))
+    );
     const [archiveIsOpen, setArchiveIsOpen] = useState(false);
     const [archiveListing, setArchiveListing] = useState(false);
+
+    useEffect(() => {
+        localStorage.setItem("conversation", JSON.stringify(conversation));
+        if (conversation) {
+            setConversation(conversation);
+        }
+    }, [conversation]);
 
     const createConversation = async (type) => {
         setConvIsOpen(false);
@@ -74,8 +86,6 @@ export function ChatProvider({ children }) {
                 `http://localhost:3000/delete/conversation/${id}`
             );
 
-            console.log("resdelete", res.data);
-
             if (res.data) {
                 setIsOpen(false);
                 setConvIsOpen(false);
@@ -94,8 +104,6 @@ export function ChatProvider({ children }) {
     };
 
     const handleSubmit = async (e, id, type) => {
-        console.log("contentMessageOperator", contentMessageOperator);
-
         try {
             setMessage(null);
             e.preventDefault();
@@ -151,8 +159,7 @@ export function ChatProvider({ children }) {
         } catch (error) {
             console.log(error.message);
         }
-    }, [conversationActiveId, message]);
-    // const handleSubmit = async(e, type);
+    }, [message]);
 
     return (
         <ChatContext.Provider

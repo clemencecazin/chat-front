@@ -51,7 +51,7 @@ export default function ConversationList({
                                     {
                                         conversation.messages[
                                             conversation.messages.length - 1
-                                        ].messages.message
+                                        ].message
                                     }
                                 </div>
                             </div>
