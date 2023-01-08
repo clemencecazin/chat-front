@@ -11,52 +11,69 @@ export default function ArchiveConversation({
     setArchiveListing,
 }) {
     const [archiveConversation, setArchiveConversation] = useState();
+    const [active, setActive] = useState(false);
 
     return (
         <div className="archives">
             <h1>Opérateur</h1>
 
             {!archiveListing ? (
-                <h2
+                <button
                     onClick={() => {
                         setConvIsOpen(false);
                         setArchiveListing(true);
                     }}
                 >
-                    Archives
-                </h2>
+                    Accéder aux archives
+                </button>
             ) : (
-                <h3
+                <button
                     onClick={() => {
                         setArchiveListing(false);
                         setConvIsOpen(true);
                     }}
                 >
                     Retour à la conversation
-                </h3>
+                </button>
             )}
+
+            {archiveListing &&
+                (!allConversations.length ||
+                    !allConversations.find((conv) => !conv.active)) && (
+                    <div className="no-archive-msg">
+                        Actuellement aucune archive
+                    </div>
+                )}
+
             {!convIsOpen && archiveListing && (
                 <div className="archives-listing">
                     <ul>
                         {allConversations &&
-                            allConversations.map((conversation) => {
+                            allConversations.map((conversation, index) => {
                                 return (
                                     !conversation.active && (
                                         <li
-                                            className="conversation-card"
+                                            key={index}
+                                            className={`${"conversation-card"} ${
+                                                conversation._id ===
+                                                    active.id && "active"
+                                            }`}
                                             onClick={() => {
                                                 setArchiveIsOpen(false);
                                                 setArchiveConversation(
                                                     conversation
                                                 );
                                                 setArchiveIsOpen(true);
+                                                setActive({
+                                                    id: conversation._id,
+                                                });
                                             }}
                                         >
                                             {
                                                 conversation.messages[
                                                     conversation.messages
                                                         .length - 1
-                                                ].messages.message
+                                                ].message
                                             }
                                         </li>
                                     )

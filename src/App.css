@@ -25,22 +25,6 @@ h1 {
     color: #34465c;
 }
 
-h2 {
-    margin-bottom: 20px;
-    color: #34465c;
-    display: flex;
-    justify-content: flex-end;
-    cursor: pointer;
-}
-
-h3 {
-    color: #34465c;
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-    cursor: pointer;
-}
-
 ul {
     padding-left: 0;
 }
@@ -101,7 +85,6 @@ p {
     border: solid 1px #94aac6;
     border-radius: 20px;
     box-sizing: border-box;
-    padding-bottom: 20px;
     width: auto;
 }
 
@@ -123,7 +106,8 @@ p {
     display: flex;
     justify-content: space-between;
     min-height: 40px;
-    padding: 0 20px;
+    padding: 10px 20px;
+    border-top: #bacce2 1px solid;
 }
 
 .conversation-visitor-form input {
@@ -134,6 +118,7 @@ p {
 }
 
 .conversation-visitor-form input[type="text"] {
+    border-color: #94aac6;
     padding-left: 10px;
 }
 
@@ -146,14 +131,18 @@ p {
     padding: 0 10px;
 }
 
+.conversation-visitor {
+    height: 100%;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
 .conversation-visitor-body {
     display: flex;
     flex-direction: column;
-    height: 100%;
     padding: 20px;
     justify-content: flex-end;
     align-items: flex-end;
-    overflow-y: scroll;
 }
 
 .conversation-visitor-body li {
@@ -191,6 +180,10 @@ p {
     margin-bottom: 10px;
 }
 
+.active {
+    background-color: #cdd8e9;
+}
+
 .conversation-card:hover {
     background-color: #f2f4f7;
 }
@@ -209,15 +202,19 @@ p {
     border: solid 1px #94aac6;
     border-radius: 20px;
     box-sizing: border-box;
-    padding-bottom: 20px;
+    margin-bottom: 20px;
     justify-content: space-between;
 }
 
-.conversation-operator-conversation ul {
+.conversation-operator {
+    height: 100%;
+    overflow-y: scroll;
+    margin: 20px;
+}
+
+.conversation-operator-conversation .conversation-operator ul {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    padding: 20px;
     justify-content: flex-end;
     align-items: flex-end;
 }
@@ -284,11 +281,6 @@ p {
     font-size: 0.8rem;
 }
 
-.conversationsSide {
-    display: flex;
-    flex-direction: column;
-}
-
 .conversationsSide ul {
     color: #34465c;
 }
@@ -307,6 +299,22 @@ p {
     width: 100%;
 }
 
+.archives button {
+    margin-bottom: 20px;
+    background-color: #34465c;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.archives .no-archive-msg {
+    height: 30px;
+    color: #34465c;
+    text-align: center;
+    font-size: 20px;
+}
+
 .archives-listing {
     display: flex;
 }
@@ -322,5 +330,9 @@ p {
 @media screen and (max-width: 920px) {
     .container {
         flex-direction: column;
+    }
+
+    .archives-listing {
+        flex-direction: columns;
     }
 }

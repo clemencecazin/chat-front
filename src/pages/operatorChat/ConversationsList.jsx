@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import ArchiveConversation from "./ArchiveConversation";
 import WindowChatOperator from "./WindowChatOperator";
@@ -15,6 +16,12 @@ export default function ConversationList({
     archiveListing,
     setArchiveListing,
 }) {
+    useEffect(() => {
+        if (conversation) {
+            setConvIsOpen(true);
+        }
+    }, [conversation]);
+
     return (
         <>
             <div className="window-chat operator">
@@ -38,7 +45,7 @@ export default function ConversationList({
                     conversation &&
                     conversation.messages.length ? (
                         <>
-                            <div className="conversationsSide">
+                            {/* <div className="conversationsSide">
                                 <div
                                     className="conversation-card"
                                     onClick={() => {
@@ -54,7 +61,7 @@ export default function ConversationList({
                                         ].message
                                     }
                                 </div>
-                            </div>
+                            </div> */}
                             {convIsOpen && (
                                 <WindowChatOperator
                                     conversation={conversation}

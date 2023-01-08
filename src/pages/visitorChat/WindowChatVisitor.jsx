@@ -6,8 +6,12 @@ export default function WindowChat({
     setContentMessage,
     contentMessage,
 }) {
-    const { createConversation, closeConversation, handleSubmit } =
-        useChatContext();
+    const {
+        createConversation,
+        closeConversation,
+        handleSubmit,
+        containerRef,
+    } = useChatContext();
 
     return (
         <div className="window-chat visitor">
@@ -30,23 +34,25 @@ export default function WindowChat({
                             <span class="material-symbols-outlined">close</span>
                         </button>
                     </div>
-                    <ul className="conversation-visitor-body">
-                        {conversation.messages &&
-                            conversation.messages.map((message, index) => {
-                                return (
-                                    <li
-                                        className={
-                                            message.sender === "visitor"
-                                                ? "conversation-visitor-message"
-                                                : "conversation-operator-message"
-                                        }
-                                        key={index}
-                                    >
-                                        {message.message}
-                                    </li>
-                                );
-                            })}
-                    </ul>
+                    <div ref={containerRef} className="conversation-visitor">
+                        <ul className="conversation-visitor-body">
+                            {conversation.messages &&
+                                conversation.messages.map((message, index) => {
+                                    return (
+                                        <li
+                                            className={
+                                                message.sender === "visitor"
+                                                    ? "conversation-visitor-message"
+                                                    : "conversation-operator-message"
+                                            }
+                                            key={index}
+                                        >
+                                            {message.message}
+                                        </li>
+                                    );
+                                })}
+                        </ul>
+                    </div>
                     <form
                         className="conversation-visitor-form"
                         onSubmit={(e) =>

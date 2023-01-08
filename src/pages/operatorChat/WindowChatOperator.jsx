@@ -6,13 +6,14 @@ export default function WindowChatOperator({
     setContentMessageOperator,
     contentMessageOperator,
 }) {
-    const { handleSubmit, deleteConversation } = useChatContext();
+    const { handleSubmit, deleteConversation, containerRef } = useChatContext();
     const [messageDelete, setMessageDelete] = useState(null);
 
     const handleDelete = (id) => {
         setMessageDelete(
             <>
-                Souhaitez-vous vraiment supprimer cette conversation ?
+                Souhaitez-vous vraiment supprimer cette conversation (elle ne
+                sera pas conservée dans les archives) ?
                 <span onClick={() => deleteConversation(id)}>Oui</span>{" "}
                 <span onClick={() => setMessageDelete(null)}>Non</span>
             </>
@@ -35,26 +36,28 @@ export default function WindowChatOperator({
                     <div className="message-delete">{messageDelete}</div>
                 </div>
             )}
-            <ul>
-                <>
-                    {conversation.messages.length
-                        ? conversation.messages.map((message, index) => {
-                              return (
-                                  <li
-                                      className={
-                                          message.sender === "visitor"
-                                              ? "conversation-visitor-message"
-                                              : "conversation-operator-message"
-                                      }
-                                      key={index}
-                                  >
-                                      {message.message}
-                                  </li>
-                              );
-                          })
-                        : ""}{" "}
-                </>
-            </ul>
+            <div ref={containerRef} className="conversation-operator">
+                <ul>
+                    <>
+                        {conversation.messages.length
+                            ? conversation.messages.map((message, index) => {
+                                  return (
+                                      <li
+                                          className={
+                                              message.sender === "visitor"
+                                                  ? "conversation-visitor-message"
+                                                  : "conversation-operator-message"
+                                          }
+                                          key={index}
+                                      >
+                                          {message.message}
+                                      </li>
+                                  );
+                              })
+                            : ""}{" "}
+                    </>
+                </ul>
+            </div>
             {conversation.active && conversation.messages.length >= 1 && (
                 <form
                     className="conversation-visitor-form"

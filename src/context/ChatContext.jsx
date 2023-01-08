@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { useState } from "react";
+import { useState, useRef, useContext } from "react";
 import { createContext } from "react";
 import WindowChat from "../pages/visitorChat/WindowChatVisitor";
 import WindowChatOperator from "../pages/operatorChat/WindowChatOperator";
@@ -29,6 +28,7 @@ export function ChatProvider({ children }) {
     );
     const [archiveIsOpen, setArchiveIsOpen] = useState(false);
     const [archiveListing, setArchiveListing] = useState(false);
+    const containerRef = useRef(null);
 
     useEffect(() => {
         localStorage.setItem("conversation", JSON.stringify(conversation));
@@ -36,6 +36,17 @@ export function ChatProvider({ children }) {
             setConversation(conversation);
         }
     }, [conversation]);
+
+    useEffect(() => {
+        if (containerRef && containerRef.current) {
+            const element = containerRef.current;
+            element.scroll({
+                top: element.scrollHeight,
+                left: 0,
+                behavior: "smooth",
+            });
+        }
+    }, [containerRef, conversation]);
 
     const createConversation = async (type) => {
         setConvIsOpen(false);
@@ -168,6 +179,7 @@ export function ChatProvider({ children }) {
                 closeConversation,
                 handleSubmit,
                 deleteConversation,
+                containerRef,
             }}
         >
             {children}
