@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useState } from "react";
 import ArchiveConversation from "./ArchiveConversation";
 import WindowChatOperator from "./WindowChatOperator";
 
@@ -25,7 +24,6 @@ export default function ConversationList({
     return (
         <>
             <div className="window-chat operator">
-                {" "}
                 <div className="header-operator">
                     {allConversations && (
                         <ArchiveConversation
@@ -43,40 +41,19 @@ export default function ConversationList({
                 <div className="conversation-operator-container">
                     {!archiveListing &&
                     conversation &&
-                    conversation.messages.length ? (
-                        <>
-                            {/* <div className="conversationsSide">
-                                <div
-                                    className="conversation-card"
-                                    onClick={() => {
-                                        setConvIsOpen(false);
-                                        setArchiveIsOpen(false);
-                                        setConversation(conversation);
-                                        setConvIsOpen(true);
-                                    }}
-                                >
-                                    {
-                                        conversation.messages[
-                                            conversation.messages.length - 1
-                                        ].message
-                                    }
-                                </div>
-                            </div> */}
-                            {convIsOpen && (
-                                <WindowChatOperator
-                                    conversation={conversation}
-                                    setContentMessageOperator={
-                                        setContentMessageOperator
-                                    }
-                                    contentMessageOperator={
-                                        contentMessageOperator
-                                    }
-                                />
-                            )}
-                        </>
-                    ) : (
-                        ""
-                    )}
+                    conversation.messages.length
+                        ? convIsOpen && (
+                              <WindowChatOperator
+                                  conversation={conversation}
+                                  setContentMessageOperator={
+                                      setContentMessageOperator
+                                  }
+                                  contentMessageOperator={
+                                      contentMessageOperator
+                                  }
+                              />
+                          )
+                        : ""}
                 </div>
             </div>
         </>

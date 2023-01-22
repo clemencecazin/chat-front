@@ -1,10 +1,9 @@
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import { createContext } from "react";
-import WindowChat from "../pages/visitorChat/WindowChatVisitor";
-import WindowChatOperator from "../pages/operatorChat/WindowChatOperator";
 import axios from "axios";
-import { useEffect } from "react";
+
 import ConversationList from "../pages/operatorChat/ConversationsList";
+import WindowChat from "../pages/visitorChat/WindowChatVisitor";
 
 const ChatContext = createContext();
 
